@@ -1,62 +1,446 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+
+const stats = [
+	{ value: 'Toronto, ON', label: 'Base Location' },
+	{ value: '5+ Years', label: 'Creating Films & Visuals' },
+	{ value: 'Digital & 35mm', label: 'Primary Mediums' },
+];
+
+const focusAreas = [
+	{
+		title: 'Directing & Cinematography',
+		description: 'Crafting narrative short films, music videos, and commercial visual content with a focus on lighting and tone.'
+	},
+	{
+		title: 'Editorial & Portraiture',
+		description: 'Capturing candid and styled portraits across digital formats and 35mm film stock.'
+	},
+	{
+		title: 'Post-Production',
+		description: 'End-to-end editing, color grading, and sound assembly for cinematic delivery.'
+	}
+];
+
+const kitList = [
+	'Digital & Cinema Systems',
+	'35mm Film Cameras',
+	'Prime Lenses',
+	'Color Grading (DaVinci Resolve)',
+	'Adobe Creative Cloud'
+];
 ---
 
-<Layout
-	title="About Me"
-	description="Lorem ipsum dolor sit amet"
-	pubDate={new Date('August 08 2021')}
-	heroImage="/blog-placeholder-about.jpg"
->
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-		labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo
-		viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam
-		adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus
-		et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus
-		vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque
-		sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
-	</p>
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<BaseHead title={`About — ${SITE_TITLE}`} description="Filmmaker and Photographer based in Toronto." />
+	</head>
+	<body>
+		<Header />
 
-	<p>
-		Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non
-		tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non
-		blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna
-		porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-		massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc.
-		Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis
-		bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra
-		massa massa ultricies mi.
-	</p>
+		<main>
+			<!-- Hero Header -->
+			<section class="about-hero">
+				<p class="eyebrow">03 / About</p>
+				<h1>Behind the Lens</h1>
+				<p class="lead">
+					I’m Lleyton Lewis, a filmmaker and photographer based in Toronto focused on visual storytelling, narrative shorts, and portrait photography.
+				</p>
+			</section>
 
-	<p>
-		Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl
-		suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet
-		nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae
-		turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-		dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat
-		semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus
-		vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-		facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam
-		vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla
-		urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
-	</p>
+			<!-- Profile & Bio Section -->
+			<section class="about-grid">
+				<div class="portrait-wrapper">
+					<img 
+						src="/homepageportrait.jpg" 
+						alt="Lleyton Lewis portrait" 
+						class="portrait-img"
+					/>
+					<div class="portrait-caption">
+						<span>Lleyton Lewis</span>
+						<span class="dot"></span>
+						<span>Toronto, ON</span>
+					</div>
+				</div>
 
-	<p>
-		Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper
-		viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc
-		scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur
-		gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus
-		pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim
-		blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id
-		cursus metus aliquam eleifend mi.
-	</p>
+				<div class="bio-content">
+					<h2>Background &amp; Approach</h2>
+					<p>
+						My work centers around atmosphere, emotion, and intentional composition. Whether shooting a short film or capturing still portraiture, I focus on building distinct visual moods through light, color, and natural movement.
+					</p>
+					<p>
+						Working across both digital cinema setups and analog 35mm film, I bring a hands-on approach to every stage of production—from early concept development and lighting on set to fine-tuning the final color grade.
+					</p>
 
-	<p>
-		Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta
-		nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam
-		tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci
-		ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar
-		proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-	</p>
-</Layout>
+					<!-- Stats Bar -->
+					<div class="stats-row">
+						{stats.map((stat) => (
+							<div class="stat-item">
+								<span class="stat-value">{stat.value}</span>
+								<span class="stat-label">{stat.label}</span>
+							</div>
+						))}
+					</div>
+				</div>
+			</section>
+
+			<!-- Focus Areas -->
+			<section class="focus-section">
+				<div class="section-title">
+					<h2>Core Focus</h2>
+					<p>What I bring to every project</p>
+				</div>
+
+				<div class="focus-grid">
+					{focusAreas.map((area, index) => (
+						<div class="focus-card">
+							<span class="card-num">0{index + 1}</span>
+							<h3>{area.title}</h3>
+							<p>{area.description}</p>
+						</div>
+					))}
+				</div>
+			</section>
+
+			<!-- Toolkit / Equipment Section -->
+			<section class="kit-section">
+				<div class="kit-header">
+					<h2>Tools &amp; Capabilities</h2>
+					<p>Key mediums and software used across production workflows.</p>
+				</div>
+				<div class="kit-tags">
+					{kitList.map((item) => (
+						<span class="kit-tag">{item}</span>
+					))}
+				</div>
+			</section>
+
+			<!-- Call to Action Banner -->
+			<section class="cta-section">
+				<div class="cta-card">
+					<h2>Have a project in mind?</h2>
+					<p>Available for freelance film work, editorial photography, and collaborations in Toronto and beyond.</p>
+					<a href="/contact" class="cta-btn">Get in Touch &rarr;</a>
+				</div>
+			</section>
+		</main>
+
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main {
+		width: auto;
+		max-width: none;
+		padding: 0;
+	}
+
+	/* Hero Header */
+	.about-hero {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 4rem 2rem 3rem;
+	}
+
+	.eyebrow {
+		text-transform: uppercase;
+		letter-spacing: 0.15em;
+		font-size: 0.8rem;
+		color: rgba(242, 242, 240, 0.5);
+		margin: 0 0 1rem;
+	}
+
+	.about-hero h1 {
+		font-size: clamp(2.75rem, 6vw, 4.5rem);
+		line-height: 1.05;
+		margin: 0 0 1.25rem;
+		font-weight: 600;
+		letter-spacing: -0.02em;
+		color: #f2f2f0;
+	}
+
+	.lead {
+		font-size: clamp(1.1rem, 2vw, 1.35rem);
+		line-height: 1.5;
+		color: rgba(242, 242, 240, 0.75);
+		max-width: 36ch;
+		margin: 0;
+	}
+
+	/* Grid Layout */
+	.about-grid {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 2rem 2rem 6rem;
+		display: grid;
+		grid-template-columns: 0.9fr 1.1fr;
+		gap: 4rem;
+		align-items: start;
+	}
+
+	.portrait-wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: 0.8rem;
+	}
+
+	.portrait-img {
+		width: 100%;
+		aspect-ratio: 4 / 5;
+		object-fit: cover;
+		border-radius: 6px;
+		border: 1px solid rgba(255, 255, 255, 0.08);
+	}
+
+	.portrait-caption {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 0.78rem;
+		color: rgba(242, 242, 240, 0.45);
+		letter-spacing: 0.03em;
+	}
+
+	.portrait-caption .dot {
+		width: 4px;
+		height: 4px;
+		background: rgba(242, 242, 240, 0.3);
+		border-radius: 50%;
+	}
+
+	/* Bio Column */
+	.bio-content h2 {
+		font-size: 1.6rem;
+		font-weight: 500;
+		color: #f2f2f0;
+		letter-spacing: -0.01em;
+		margin: 0 0 1.5rem;
+	}
+
+	.bio-content p {
+		font-size: 1.02rem;
+		line-height: 1.7;
+		color: rgba(242, 242, 240, 0.65);
+		margin-bottom: 1.25rem;
+	}
+
+	/* Stats Row */
+	.stats-row {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1rem;
+		margin-top: 3rem;
+		padding-top: 2rem;
+		border-top: 1px solid rgba(255, 255, 255, 0.08);
+	}
+
+	.stat-item {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	.stat-value {
+		font-size: 1.1rem;
+		font-weight: 600;
+		color: #f2f2f0;
+		letter-spacing: -0.01em;
+	}
+
+	.stat-label {
+		font-size: 0.72rem;
+		color: rgba(242, 242, 240, 0.45);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	/* Focus Section */
+	.focus-section {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 4rem 2rem 6rem;
+		border-top: 1px solid rgba(255, 255, 255, 0.08);
+	}
+
+	.section-title {
+		margin-bottom: 3rem;
+	}
+
+	.section-title h2 {
+		font-size: 1.6rem;
+		font-weight: 500;
+		color: #f2f2f0;
+		margin: 0 0 0.35rem;
+		letter-spacing: -0.01em;
+	}
+
+	.section-title p {
+		font-size: 0.88rem;
+		color: rgba(242, 242, 240, 0.45);
+		margin: 0;
+	}
+
+	.focus-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.25rem;
+	}
+
+	.focus-card {
+		padding: 2rem 1.75rem;
+		background: rgba(255, 255, 255, 0.02);
+		border: 1px solid rgba(255, 255, 255, 0.06);
+		border-radius: 12px;
+		display: flex;
+		flex-direction: column;
+		transition: border-color 0.25s ease, background 0.25s ease;
+	}
+
+	.focus-card:hover {
+		background: rgba(255, 255, 255, 0.04);
+		border-color: rgba(255, 255, 255, 0.15);
+	}
+
+	.card-num {
+		font-family: monospace;
+		font-size: 0.75rem;
+		color: rgba(232, 185, 120, 0.8);
+		margin-bottom: 1.5rem;
+	}
+
+	.focus-card h3 {
+		font-size: 1.15rem;
+		font-weight: 500;
+		color: #f2f2f0;
+		margin: 0 0 0.75rem;
+		letter-spacing: -0.01em;
+	}
+
+	.focus-card p {
+		font-size: 0.88rem;
+		line-height: 1.6;
+		color: rgba(242, 242, 240, 0.55);
+		margin: 0;
+	}
+
+	/* Kit / Capabilities Section */
+	.kit-section {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 2rem 6rem;
+	}
+
+	.kit-header {
+		margin-bottom: 1.5rem;
+	}
+
+	.kit-header h2 {
+		font-size: 1.3rem;
+		font-weight: 500;
+		color: #f2f2f0;
+		margin: 0 0 0.35rem;
+	}
+
+	.kit-header p {
+		font-size: 0.85rem;
+		color: rgba(242, 242, 240, 0.45);
+		margin: 0;
+	}
+
+	.kit-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.6rem;
+	}
+
+	.kit-tag {
+		padding: 0.55em 1em;
+		background: rgba(255, 255, 255, 0.03);
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		border-radius: 100px;
+		font-size: 0.8rem;
+		color: rgba(242, 242, 240, 0.7);
+		letter-spacing: 0.02em;
+	}
+
+	/* CTA Banner */
+	.cta-section {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 2rem 8rem;
+	}
+
+	.cta-card {
+		padding: 3.5rem 3rem;
+		background: radial-gradient(circle at top left, rgba(232, 185, 120, 0.08), transparent 60%), rgba(255, 255, 255, 0.02);
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		border-radius: 16px;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 1rem;
+	}
+
+	.cta-card h2 {
+		font-size: 1.8rem;
+		font-weight: 500;
+		color: #f2f2f0;
+		margin: 0;
+		letter-spacing: -0.01em;
+	}
+
+	.cta-card p {
+		font-size: 1rem;
+		color: rgba(242, 242, 240, 0.6);
+		margin: 0 0 0.5rem;
+		max-width: 48ch;
+		line-height: 1.5;
+	}
+
+	.cta-btn {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.7em 1.4em;
+		background: #f2f2f0;
+		color: #080808;
+		border-radius: 100px;
+		font-size: 0.85rem;
+		font-weight: 600;
+		text-decoration: none;
+		letter-spacing: 0.02em;
+		transition: transform 0.2s ease, background 0.2s ease;
+	}
+
+	.cta-btn:hover {
+		background: #ffffff;
+		transform: translateY(-1px);
+	}
+
+	/* Responsive Breakpoints */
+	@media (max-width: 900px) {
+		.about-grid {
+			grid-template-columns: 1fr;
+			gap: 2.5rem;
+		}
+
+		.focus-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.stats-row {
+			grid-template-columns: 1fr;
+			gap: 1.25rem;
+		}
+
+		.cta-card {
+			padding: 2.5rem 1.75rem;
+		}
+	}
+</style>
