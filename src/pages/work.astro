@@ -4,54 +4,56 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
-// ============================================================================
-// 📁 ADD YOUR WORK HERE
-// Place image files inside your project's `public/` folder.
-// Example: If an image is at `public/work/film.jpg`, use `image: '/work/film.jpg'`
-// ============================================================================
-const featuredWork = [
+// Initial preloaded project items
+const initialWork = [
 	{
+		id: '1',
 		title: 'Project One',
 		category: 'Short Film',
-		type: 'Video', // Options: 'Video' or 'Photo'
-		date: '2026-05-15', // Format: YYYY-MM-DD (used for sorting newest first)
-		href: '/work/project-one',
-		image: '/work/project-one-thumb.jpg', // Path inside public/ folder
+		type: 'Video',
+		date: '2026-05-15',
+		description: 'A visual exploration of narrative structure.',
+		youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+		image: '',
 	},
 	{
+		id: '2',
 		title: 'Photo Series A',
 		category: 'Editorial',
 		type: 'Photo',
 		date: '2026-04-10',
-		href: '/work/photo-series-a',
+		description: '35mm portraiture set in Toronto.',
+		youtubeUrl: '',
 		image: '/work/photo-a-thumb.jpg',
 	},
 	{
+		id: '3',
 		title: 'Project Two',
 		category: 'Commercial',
 		type: 'Video',
 		date: '2026-02-01',
-		href: '/work/project-two',
-		image: '/work/project-two-thumb.jpg',
+		description: 'Brand commercial visual design.',
+		youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+		image: '',
 	},
 	{
+		id: '4',
 		title: 'Photo Series B',
 		category: 'Portrait',
 		type: 'Photo',
 		date: '2025-11-20',
-		href: '/work/photo-series-b',
+		description: 'Studio light setup series.',
+		youtubeUrl: '',
 		image: '/work/photo-b-thumb.jpg',
 	},
 ];
-
-// Automatically sort all work from newest to oldest by date
-const sortedWork = [...featuredWork].sort(
-	(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-);
 ---
+
 <!doctype html>
 <html lang="en">
 	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<BaseHead title={`My Work | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
@@ -66,7 +68,7 @@ const sortedWork = [...featuredWork].sort(
 			<section class="work" id="work">
 				<div class="work-header">
 					<h2>Selected Work</h2>
-					
+
 					<!-- Filter Controls -->
 					<div class="filter-tabs">
 						<button class="filter-btn active" data-filter="all">All</button>
@@ -74,44 +76,174 @@ const sortedWork = [...featuredWork].sort(
 						<button class="filter-btn" data-filter="Photo">Photos</button>
 					</div>
 
-					<!-- Fixed Updated Date Display -->
 					<div class="updated-at">
 						Updated as of: <span id="current-date">July 2026</span>
 					</div>
 				</div>
 
-				<div class="work-grid">
-					{sortedWork.map((project) => (
-						<a class="work-item" href={project.href} data-type={project.type}>
-							<div class="thumb">
-								{project.image ? (
-									<img src={project.image} alt={project.title} loading="lazy" />
-								) : (
-									<span class="thumb-label">No Thumbnail</span>
-								)}
-								<span class="type-badge">{project.type}</span>
-							</div>
-							<div class="work-item-meta">
-								<div>
-									<h3>{project.title}</h3>
-									<p>{project.category}</p>
-								</div>
-								<time datetime={project.date}>
-									{new Date(project.date).toLocaleDateString('en-US', {
-										year: 'numeric',
-										month: 'short'
-									})}
-								</time>
-							</div>
-						</a>
-					))}
-				</div>
+				<!-- Dynamic Container Rendered on Client -->
+				<div class="work-grid" id="work-grid"></div>
 			</section>
 		</main>
+
+		<!-- Floating Add Work Button -->
+		<button id="open-modal-btn" class="fab-btn" aria-label="Add new work">
+			<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+				<line x1="12" y1="5" x2="12" y2="19"></line>
+				<line x1="5" y1="12" x2="19" y2="12"></line>
+			</svg>
+		</button>
+
+		<!-- Add Work Modal -->
+		<div id="upload-modal" class="modal-overlay">
+			<div class="modal-card">
+				<div class="modal-header">
+					<h3>Add New Work</h3>
+					<button id="close-modal-btn" class="close-btn">&times;</button>
+				</div>
+
+				<form id="add-work-form">
+					<div class="form-group">
+						<label>Media Type</label>
+						<div class="type-selector">
+							<label class="radio-label">
+								<input type="radio" name="mediaType" value="Video" checked />
+								<span>YouTube Video</span>
+							</label>
+							<label class="radio-label">
+								<input type="radio" name="mediaType" value="Photo" />
+								<span>Image Upload</span>
+							</label>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="title">Title</label>
+						<input type="text" id="title" required placeholder="e.g. Short Film Title" />
+					</div>
+
+					<div class="form-group">
+						<label for="category">Category</label>
+						<input type="text" id="category" required placeholder="e.g. Narrative, Editorial, Commercial" />
+					</div>
+
+					<div class="form-group">
+						<label for="date">Date</label>
+						<input type="date" id="date" required />
+					</div>
+
+					<!-- YouTube URL Input -->
+					<div class="form-group" id="youtube-field">
+						<label for="youtubeUrl">YouTube URL</label>
+						<input type="url" id="youtubeUrl" placeholder="https://www.youtube.com/watch?v=..." />
+					</div>
+
+					<!-- Direct Computer Image Upload Input -->
+					<div class="form-group hidden" id="image-field">
+						<label for="imageFile">Select Image from Computer</label>
+						<input type="file" id="imageFile" accept="image/*" />
+					</div>
+
+					<div class="form-group">
+						<label for="description">Description</label>
+						<textarea id="description" rows="3" placeholder="Brief project overview..."></textarea>
+					</div>
+
+					<button type="submit" class="submit-btn">Add to Gallery</button>
+				</form>
+			</div>
+		</div>
+
 		<Footer />
 
-		<script>
-			// Set current date dynamically on client load
+		<script is:inline define:vars={{ initialWork }}>
+			// Client-Side State Management
+			let workItems = [...initialWork];
+			let activeFilter = 'all';
+
+			// Helper to extract embeddable YouTube ID
+			function getYouTubeEmbedUrl(url) {
+				if (!url) return '';
+				const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+				const match = url.match(regExp);
+				return (match && match[2].length === 11)
+					? `https://www.youtube.com/embed/${match[2]}`
+					: url;
+			}
+
+			// Render items sorted by date (newest first)
+			function renderWork() {
+				const container = document.getElementById('work-grid');
+				if (!container) return;
+
+				// Sort newest first
+				const sorted = [...workItems].sort(
+					(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+				);
+
+				container.innerHTML = '';
+
+				sorted.forEach(item => {
+					if (activeFilter !== 'all' && item.type !== activeFilter) {
+						return;
+					}
+
+					const card = document.createElement('div');
+					card.className = 'work-card';
+
+					let mediaHTML = '';
+					if (item.type === 'Video' && item.youtubeUrl) {
+						const embedUrl = getYouTubeEmbedUrl(item.youtubeUrl);
+						mediaHTML = `
+							<div class="video-embed-wrapper">
+								<iframe 
+									src="${embedUrl}" 
+									frameborder="0" 
+									allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+									allowfullscreen
+									title="${item.title}"
+								></iframe>
+							</div>
+						`;
+					} else if (item.image) {
+						mediaHTML = `
+							<div class="thumb">
+								<img src="${item.image}" alt="${item.title}" loading="lazy" />
+								<span class="type-badge">${item.type}</span>
+							</div>
+						`;
+					} else {
+						mediaHTML = `
+							<div class="thumb">
+								<span class="thumb-label">No Media</span>
+								<span class="type-badge">${item.type}</span>
+							</div>
+						`;
+					}
+
+					const formattedDate = new Date(item.date).toLocaleDateString('en-US', {
+						year: 'numeric',
+						month: 'short',
+						timeZone: 'UTC'
+					});
+
+					card.innerHTML = `
+						${mediaHTML}
+						<div class="work-item-meta">
+							<div>
+								<h3>${item.title}</h3>
+								<p class="category">${item.category}</p>
+								${item.description ? `<p class="description">${item.description}</p>` : ''}
+							</div>
+							<time datetime="${item.date}">${formattedDate}</time>
+						</div>
+					`;
+
+					container.appendChild(card);
+				});
+			}
+
+			// Set current date
 			const dateSpan = document.getElementById('current-date');
 			if (dateSpan) {
 				const today = new Date();
@@ -122,27 +254,108 @@ const sortedWork = [...featuredWork].sort(
 				});
 			}
 
-			// Client-side filtering logic
+			// Filter button behavior
 			const filterBtns = document.querySelectorAll('.filter-btn');
-			const workItems = document.querySelectorAll('.work-item');
-
 			filterBtns.forEach(btn => {
 				btn.addEventListener('click', () => {
 					filterBtns.forEach(b => b.classList.remove('active'));
 					btn.classList.add('active');
-
-					const filterValue = btn.getAttribute('data-filter');
-
-					workItems.forEach(item => {
-						const itemType = item.getAttribute('data-type');
-						if (filterValue === 'all' || itemType === filterValue) {
-							(item as HTMLElement).style.display = 'block';
-						} else {
-							(item as HTMLElement).style.display = 'none';
-						}
-					});
+					activeFilter = btn.getAttribute('data-filter') || 'all';
+					renderWork();
 				});
 			});
+
+			// Modal & Password Protection
+			const modal = document.getElementById('upload-modal');
+			const openBtn = document.getElementById('open-modal-btn');
+			const closeBtn = document.getElementById('close-modal-btn');
+			const radioBtns = document.querySelectorAll('input[name="mediaType"]');
+			const ytField = document.getElementById('youtube-field');
+			const imgField = document.getElementById('image-field');
+			const form = document.getElementById('add-work-form');
+
+			openBtn?.addEventListener('click', () => {
+				const password = prompt('Enter password to add work:');
+				if (password === 'shopping') {
+					modal?.classList.add('active');
+				} else if (password !== null) {
+					alert('Incorrect password!');
+				}
+			});
+
+			closeBtn?.addEventListener('click', () => modal?.classList.remove('active'));
+			
+			modal?.addEventListener('click', (e) => {
+				if (e.target === modal) modal.classList.remove('active');
+			});
+
+			radioBtns.forEach(radio => {
+				radio.addEventListener('change', (e) => {
+					const val = e.target.value;
+					if (val === 'Video') {
+						ytField?.classList.remove('hidden');
+						imgField?.classList.add('hidden');
+					} else {
+						ytField?.classList.add('hidden');
+						imgField?.classList.remove('hidden');
+					}
+				});
+			});
+
+			// Submit Form Logic with Direct Computer File Reader
+			form?.addEventListener('submit', (e) => {
+				e.preventDefault();
+
+				const title = document.getElementById('title').value;
+				const category = document.getElementById('category').value;
+				const date = document.getElementById('date').value;
+				const description = document.getElementById('description').value;
+				const mediaType = document.querySelector('input[name="mediaType"]:checked').value;
+				
+				let youtubeUrl = '';
+
+				if (mediaType === 'Video') {
+					youtubeUrl = document.getElementById('youtubeUrl').value;
+					addNewWorkItem({ title, category, date, description, mediaType, youtubeUrl, image: '' });
+				} else {
+					const fileInput = document.getElementById('imageFile');
+					if (fileInput.files && fileInput.files[0]) {
+						const reader = new FileReader();
+						reader.onload = function (evt) {
+							const imageDataUrl = evt.target.result;
+							addNewWorkItem({ title, category, date, description, mediaType, youtubeUrl: '', image: imageDataUrl });
+						};
+						reader.readAsDataURL(fileInput.files[0]);
+					} else {
+						addNewWorkItem({ title, category, date, description, mediaType, youtubeUrl: '', image: '' });
+					}
+				}
+			});
+
+			function addNewWorkItem(data) {
+				const newItem = {
+					id: Date.now().toString(),
+					title: data.title,
+					category: data.category,
+					type: data.mediaType,
+					date: data.date,
+					description: data.description,
+					youtubeUrl: data.youtubeUrl,
+					image: data.image
+				};
+
+				workItems.push(newItem);
+				renderWork();
+
+				// Reset form and close modal
+				form.reset();
+				ytField?.classList.remove('hidden');
+				imgField?.classList.add('hidden');
+				modal?.classList.remove('active');
+			}
+
+			// Initial execution
+			renderWork();
 		</script>
 	</body>
 </html>
@@ -218,7 +431,6 @@ const sortedWork = [...featuredWork].sort(
 		font-weight: 500;
 	}
 
-	/* Updated Date Tag Styling */
 	.updated-at {
 		font-size: 0.85rem;
 		color: rgba(242, 242, 240, 0.5);
@@ -233,11 +445,31 @@ const sortedWork = [...featuredWork].sort(
 		grid-template-columns: repeat(2, 1fr);
 		gap: 2.5rem 1.5rem;
 	}
-	.work-item {
-		text-decoration: none;
-		color: inherit;
-		display: block;
+
+	.work-card {
+		display: flex;
+		flex-direction: column;
 	}
+
+	/* Video Embed Container */
+	.video-embed-wrapper {
+		position: relative;
+		width: 100%;
+		aspect-ratio: 16 / 9;
+		background: #141414;
+		border-radius: 4px;
+		overflow: hidden;
+		border: 1px solid rgba(255, 255, 255, 0.08);
+	}
+	.video-embed-wrapper iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		border: 0;
+	}
+
 	.thumb {
 		position: relative;
 		aspect-ratio: 16 / 10;
@@ -247,20 +479,12 @@ const sortedWork = [...featuredWork].sort(
 		align-items: center;
 		justify-content: center;
 		overflow: hidden;
-		transition: border-color 0.25s ease;
 		border-radius: 4px;
 	}
 	.thumb img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		transition: transform 0.3s ease;
-	}
-	.work-item:hover .thumb img {
-		transform: scale(1.03);
-	}
-	.work-item:hover .thumb {
-		border-color: rgba(255, 255, 255, 0.2);
 	}
 	.thumb-label {
 		font-size: 0.75rem;
@@ -268,7 +492,7 @@ const sortedWork = [...featuredWork].sort(
 		letter-spacing: 0.05em;
 		text-transform: uppercase;
 	}
-	
+
 	.type-badge {
 		position: absolute;
 		top: 0.75rem;
@@ -296,14 +520,169 @@ const sortedWork = [...featuredWork].sort(
 		font-weight: 500;
 		color: #f2f2f0;
 	}
-	.work-item-meta p {
+	.work-item-meta .category {
 		margin: 0.2rem 0 0;
 		font-size: 0.8rem;
 		color: rgba(242, 242, 240, 0.45);
 	}
+	.work-item-meta .description {
+		margin: 0.4rem 0 0;
+		font-size: 0.82rem;
+		line-height: 1.4;
+		color: rgba(242, 242, 240, 0.6);
+	}
 	.work-item-meta time {
 		font-size: 0.8rem;
 		color: rgba(242, 242, 240, 0.35);
+		white-space: nowrap;
+		margin-left: 0.5rem;
+	}
+
+	/* Floating Action Button (FAB) */
+	.fab-btn {
+		position: fixed;
+		bottom: 2rem;
+		right: 2rem;
+		width: 52px;
+		height: 52px;
+		border-radius: 50%;
+		background: #f2f2f0;
+		color: #141414;
+		border: none;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+		transition: transform 0.2s ease, background 0.2s ease;
+		z-index: 100;
+	}
+	.fab-btn:hover {
+		transform: scale(1.08);
+		background: #ffffff;
+	}
+
+	/* Modal Styling */
+	.modal-overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background: rgba(0, 0, 0, 0.75);
+		backdrop-filter: blur(6px);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 0.25s ease;
+		z-index: 200;
+		padding: 1.5rem;
+	}
+	.modal-overlay.active {
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	.modal-card {
+		background: #181818;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		border-radius: 12px;
+		width: 100%;
+		max-width: 480px;
+		padding: 1.75rem;
+		color: #f2f2f0;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+	}
+
+	.modal-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 1.25rem;
+	}
+	.modal-header h3 {
+		margin: 0;
+		font-size: 1.2rem;
+		font-weight: 500;
+	}
+	.close-btn {
+		background: transparent;
+		border: none;
+		color: rgba(242, 242, 240, 0.5);
+		font-size: 1.5rem;
+		cursor: pointer;
+		padding: 0;
+		line-height: 1;
+	}
+	.close-btn:hover {
+		color: #f2f2f0;
+	}
+
+	.form-group {
+		margin-bottom: 1rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.35rem;
+	}
+	.form-group.hidden {
+		display: none;
+	}
+	.form-group label {
+		font-size: 0.8rem;
+		color: rgba(242, 242, 240, 0.7);
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+	}
+	.form-group input[type="text"],
+	.form-group input[type="url"],
+	.form-group input[type="date"],
+	.form-group input[type="file"],
+	.form-group textarea {
+		background: rgba(255, 255, 255, 0.04);
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		border-radius: 6px;
+		padding: 0.6rem 0.8rem;
+		color: #f2f2f0;
+		font-size: 0.9rem;
+		font-family: inherit;
+		outline: none;
+	}
+	.form-group input:focus,
+	.form-group textarea:focus {
+		border-color: rgba(255, 255, 255, 0.3);
+	}
+
+	.type-selector {
+		display: flex;
+		gap: 1rem;
+		margin-top: 0.2rem;
+	}
+	.radio-label {
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+		font-size: 0.85rem;
+		color: rgba(242, 242, 240, 0.8);
+		cursor: pointer;
+	}
+
+	.submit-btn {
+		width: 100%;
+		padding: 0.75rem;
+		background: #f2f2f0;
+		color: #141414;
+		border: none;
+		border-radius: 6px;
+		font-weight: 600;
+		font-size: 0.88rem;
+		cursor: pointer;
+		margin-top: 0.5rem;
+		transition: background 0.2s ease;
+	}
+	.submit-btn:hover {
+		background: #ffffff;
 	}
 
 	@media (max-width: 900px) {
