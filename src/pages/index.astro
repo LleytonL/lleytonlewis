@@ -28,14 +28,11 @@ const featuredWork = [
 					</p>
 				</div>
 
-				<!-- ============================================ -->
-				<!-- 📸 ADD YOUR HERO IMAGE HERE                    -->
-				<!-- Replace this div with: <img src="/your-photo.jpg" alt="..." /> -->
-				<!-- ============================================ -->
-				<div class="hero-image-placeholder">
-					<span>ADD IMAGE HERE</span>
-					<span class="hint">Recommended: 1600×2000px or larger, portrait orientation</span>
-				</div>
+				<img
+					class="hero-image"
+					src="/homepageportrait.jpg"
+					alt="Lleyton Lewis, filmmaker and photographer"
+				/>
 			</section>
 
 			<section class="work" id="work">
@@ -99,33 +96,12 @@ const featuredWork = [
 		line-height: 1.6;
 		color: rgba(242, 242, 240, 0.65);
 	}
-	.hero-image-placeholder {
-		aspect-ratio: 4 / 5;
+	.hero-image {
 		width: 100%;
-		border: 2px dashed rgba(232, 185, 120, 0.4);
-		background: #141414;
+		aspect-ratio: 4 / 5;
+		object-fit: cover;
 		border-radius: 4px;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		gap: 0.5rem;
-		text-align: center;
-		padding: 2rem;
-	}
-	.hero-image-placeholder span {
-		color: #e8b978;
-		font-size: 0.9rem;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-		font-weight: 600;
-	}
-	.hero-image-placeholder .hint {
-		color: rgba(242, 242, 240, 0.35);
-		font-size: 0.7rem;
-		letter-spacing: 0.02em;
-		text-transform: none;
-		font-weight: 400;
+		display: block;
 	}
 
 	.work {
@@ -210,7 +186,7 @@ const featuredWork = [
 			padding: 3rem 1.5rem 4rem;
 			min-height: auto;
 		}
-		.hero-image-placeholder {
+		.hero-image {
 			aspect-ratio: 16 / 10;
 			order: -1;
 		}
