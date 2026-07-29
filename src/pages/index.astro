@@ -3,86 +3,223 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+const featuredWork = [
+	{ title: 'Project One', category: 'Short Film', href: '/work/project-one' },
+	{ title: 'Project Two', category: 'Commercial', href: '/work/project-two' },
+	{ title: 'Project Three', category: 'Music Video', href: '/work/project-three' },
+	{ title: 'Project Four', category: 'Documentary', href: '/work/project-four' },
+];
 ---
 <!doctype html>
 <html lang="en">
-    <head>
-        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-    </head>
-    <body>
-        <Header />
-        <main>
-            <h1>🧑‍🚀 Hello, Astronaut!</h1>
-            <p>
-                Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-                template serves as a lightweight, minimally-styled starting point for anyone looking to build
-                a personal website, blog, or portfolio with Astro.
-            </p>
-            <p>
-                This template comes with a few integrations already configured in your
-                <code>astro.config.mjs</code> file. You can customize your setup with
-                <a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-                React, or Vue to your project.
-            </p>
-            <p>Here are a few ideas on how to get started with the template:</p>
-            <ul>
-                <li>Edit this page in <code>src/pages/index.astro</code></li>
-                <li>Edit the site header items in <code>src/components/Header.astro</code></li>
-                <li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-                <li>Check out the included blog posts in <code>src/content/blog/</code></li>
-                <li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-            </ul>
-            <p>
-                Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-                    >read the docs
-                </a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-            </p>
-            <p>
-                Looking for a blog template with a bit more personality? Check out 
-                    href="https://github.com/Charca/astro-blog-template"
-                    >astro-blog-template
-                </a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-            </p>
-        </main>
-        <Footer />
-    </body>
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="hero">
+				<div class="hero-text">
+					<p class="eyebrow">Filmmaker &amp; Photographer</p>
+					<h1>Your Name</h1>
+					<p class="hero-sub">
+						Telling stories through motion and light. Based in [City] —
+						available worldwide.
+					</p>
+				</div>
+
+				<!-- ============================================ -->
+				<!-- 📸 ADD YOUR HERO IMAGE HERE                    -->
+				<!-- Replace this div with: <img src="/your-photo.jpg" alt="..." /> -->
+				<!-- ============================================ -->
+				<div class="hero-image-placeholder">
+					<span>ADD IMAGE HERE</span>
+					<span class="hint">Recommended: 1600×2000px or larger, portrait orientation</span>
+				</div>
+			</section>
+
+			<section class="work" id="work">
+				<div class="work-header">
+					<h2>Selected Work</h2>
+					<a class="view-all" href="/work">View all &rarr;</a>
+				</div>
+				<div class="work-grid">
+					{featuredWork.map((project) => (
+						<a class="work-item" href={project.href}>
+							<div class="thumb">
+								<span class="thumb-label">Add thumbnail</span>
+							</div>
+							<div class="work-item-meta">
+								<h3>{project.title}</h3>
+								<p>{project.category}</p>
+							</div>
+						</a>
+					))}
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
 </html>
 <style>
-    main {
-        background: #0a0a0a;
-        color: rgba(242, 242, 240, 0.85);
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 4rem 2rem 6rem;
-        line-height: 1.7;
-    }
-    main h1 {
-        color: #f2f2f0;
-        font-weight: 600;
-        letter-spacing: -0.01em;
-    }
-    main p {
-        color: rgba(242, 242, 240, 0.65);
-    }
-    main a {
-        color: #f2f2f0;
-        text-decoration: underline;
-        text-decoration-color: rgba(242, 242, 240, 0.3);
-        text-underline-offset: 3px;
-        transition: text-decoration-color 0.25s ease;
-    }
-    main a:hover {
-        text-decoration-color: #f2f2f0;
-    }
-    main code {
-        background: #141414;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        padding: 0.15em 0.4em;
-        border-radius: 3px;
-        font-size: 0.9em;
-        color: #e8b978;
-    }
-    main ul {
-        color: rgba(242, 242, 240, 0.65);
-    }
+	main {
+		width: auto;
+		max-width: none;
+		padding: 0;
+	}
+	.hero {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 4rem 2rem 6rem;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 3rem;
+		align-items: center;
+		min-height: 80vh;
+	}
+	.eyebrow {
+		text-transform: uppercase;
+		letter-spacing: 0.15em;
+		font-size: 0.8rem;
+		color: rgba(242, 242, 240, 0.5);
+		margin: 0 0 1rem;
+	}
+	.hero h1 {
+		font-size: clamp(2.75rem, 6vw, 4.5rem);
+		line-height: 1;
+		margin: 0;
+		font-weight: 600;
+		letter-spacing: -0.02em;
+		color: #f2f2f0;
+	}
+	.hero-sub {
+		margin: 1.5rem 0 0;
+		max-width: 32ch;
+		font-size: 1.05rem;
+		line-height: 1.6;
+		color: rgba(242, 242, 240, 0.65);
+	}
+	.hero-image-placeholder {
+		aspect-ratio: 4 / 5;
+		width: 100%;
+		border: 2px dashed rgba(232, 185, 120, 0.4);
+		background: #141414;
+		border-radius: 4px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		text-align: center;
+		padding: 2rem;
+	}
+	.hero-image-placeholder span {
+		color: #e8b978;
+		font-size: 0.9rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		font-weight: 600;
+	}
+	.hero-image-placeholder .hint {
+		color: rgba(242, 242, 240, 0.35);
+		font-size: 0.7rem;
+		letter-spacing: 0.02em;
+		text-transform: none;
+		font-weight: 400;
+	}
+
+	.work {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 2rem 2rem 8rem;
+	}
+	.work-header {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		margin-bottom: 2rem;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+		padding-bottom: 1.25rem;
+	}
+	.work-header h2 {
+		margin: 0;
+		font-size: 1.4rem;
+		font-weight: 500;
+		letter-spacing: -0.01em;
+		color: #f2f2f0;
+	}
+	.view-all {
+		font-size: 0.85rem;
+		color: rgba(242, 242, 240, 0.55);
+		text-decoration: none;
+		letter-spacing: 0.03em;
+		transition: color 0.25s ease;
+	}
+	.view-all:hover {
+		color: #f2f2f0;
+	}
+	.work-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 2rem 1.5rem;
+	}
+	.work-item {
+		text-decoration: none;
+		color: inherit;
+		display: block;
+	}
+	.thumb {
+		aspect-ratio: 16 / 10;
+		background: #141414;
+		border: 1px solid rgba(255, 255, 255, 0.06);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+		transition: border-color 0.25s ease;
+	}
+	.work-item:hover .thumb {
+		border-color: rgba(255, 255, 255, 0.2);
+	}
+	.thumb-label {
+		font-size: 0.75rem;
+		color: rgba(242, 242, 240, 0.3);
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+	}
+	.work-item-meta {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		margin-top: 0.85rem;
+	}
+	.work-item-meta h3 {
+		margin: 0;
+		font-size: 1rem;
+		font-weight: 500;
+		color: #f2f2f0;
+	}
+	.work-item-meta p {
+		margin: 0;
+		font-size: 0.8rem;
+		color: rgba(242, 242, 240, 0.45);
+	}
+	@media (max-width: 900px) {
+		.hero {
+			grid-template-columns: 1fr;
+			padding: 3rem 1.5rem 4rem;
+			min-height: auto;
+		}
+		.hero-image-placeholder {
+			aspect-ratio: 16 / 10;
+			order: -1;
+		}
+		.work {
+			padding: 2rem 1.5rem 6rem;
+		}
+		.work-grid {
+			grid-template-columns: 1fr;
+		}
+	}
 </style>
