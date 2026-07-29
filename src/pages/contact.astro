@@ -3,86 +3,280 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+// ============================================================================
+// ✉️ CONTACT DETAILS & SOCIAL LINKS
+// Update your email and profile URLs here
+// ============================================================================
+const contactInfo = {
+	primaryEmail: 'hello@lleytonlewis.com',
+	workEmail: 'work@lleytonlewis.com',
+	location: 'Available Worldwide',
+};
+
+const socialLinks = [
+	{
+		name: 'Instagram',
+		url: 'https://instagram.com/yourhandle',
+		icon: 'instagram',
+	},
+	{
+		name: 'Media Instagram',
+		url: 'https://instagram.com/yourmediahandle',
+		icon: 'instagram',
+	},
+	{
+		name: 'YouTube',
+		url: 'https://youtube.com/@yourhandle',
+		icon: 'youtube',
+	},
+	{
+		name: 'X/Twitter',
+		url: 'https://x.com/yourhandle',
+		icon: 'x',
+	},
+	{
+		name: 'Letterboxd',
+		url: 'https://letterboxd.com/yourhandle',
+		icon: 'letterboxd',
+	},
+];
 ---
+
 <!doctype html>
 <html lang="en">
-    <head>
-        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-    </head>
-    <body>
-        <Header />
-        <main>
-            <h1>🧑‍🚀 Contact, Astronaut!</h1>
-            <p>
-                Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-                template serves as a lightweight, minimally-styled starting point for anyone looking to build
-                a personal website, blog, or portfolio with Astro.
-            </p>
-            <p>
-                This template comes with a few integrations already configured in your
-                <code>astro.config.mjs</code> file. You can customize your setup with
-                <a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-                React, or Vue to your project.
-            </p>
-            <p>Here are a few ideas on how to get started with the template:</p>
-            <ul>
-                <li>Edit this page in <code>src/pages/index.astro</code></li>
-                <li>Edit the site header items in <code>src/components/Header.astro</code></li>
-                <li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-                <li>Check out the included blog posts in <code>src/content/blog/</code></li>
-                <li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-            </ul>
-            <p>
-                Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-                    >read the docs
-                </a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-            </p>
-            <p>
-                Looking for a blog template with a bit more personality? Check out 
-                    href="https://github.com/Charca/astro-blog-template"
-                    >astro-blog-template
-                </a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-            </p>
-        </main>
-        <Footer />
-    </body>
+	<head>
+		<BaseHead title={`Contact | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="hero">
+				<div class="hero-text">
+					<h1>Contact</h1>
+				</div>
+			</section>
+
+			<section class="contact-section">
+				<div class="contact-grid">
+					<!-- Email / Direct Contact -->
+					<div class="direct-contact">
+						<h2>Get in Touch</h2>
+						<p class="contact-sub">
+							For general inquiries, project bookings, or collaboration opportunities, feel free to reach out via email.
+						</p>
+
+						<div class="email-block">
+							<span class="label">General Enquiries</span>
+							<a href={`mailto:${contactInfo.primaryEmail}`} class="email-link">
+								{contactInfo.primaryEmail} &rarr;
+							</a>
+						</div>
+
+						<div class="email-block">
+							<span class="label">Commercial & Work</span>
+							<a href={`mailto:${contactInfo.workEmail}`} class="email-link">
+								{contactInfo.workEmail} &rarr;
+							</a>
+						</div>
+
+						<div class="location-block">
+							<span class="label">Location</span>
+							<p>{contactInfo.location}</p>
+						</div>
+					</div>
+
+					<!-- Social Buttons -->
+					<div class="socials-contact">
+						<h2>Connect</h2>
+						<p class="contact-sub">Find my work, photos, videos, and film reviews across these platforms.</p>
+
+						<div class="social-buttons">
+							{socialLinks.map((link) => (
+								<a href={link.url} target="_blank" rel="noopener noreferrer" class="social-btn">
+									<span class="btn-icon">
+										{link.icon === 'instagram' && (
+											<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+												<rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+												<path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+												<line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+											</svg>
+										)}
+										{link.icon === 'youtube' && (
+											<svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+												<path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+												<polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+											</svg>
+										)}
+										{link.icon === 'x' && (
+											<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+												<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+											</svg>
+										)}
+										{link.icon === 'letterboxd' && (
+											<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+												<circle cx="7" cy="12" r="3.5" opacity="0.9" />
+												<circle cx="12" cy="12" r="3.5" opacity="0.9" />
+												<circle cx="17" cy="12" r="3.5" opacity="0.9" />
+											</svg>
+										)}
+									</span>
+									<span class="btn-text">{link.name}</span>
+									<span class="btn-arrow">&rarr;</span>
+								</a>
+							))}
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
 </html>
+
 <style>
-    main {
-        background: #0a0a0a;
-        color: rgba(242, 242, 240, 0.85);
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 4rem 2rem 6rem;
-        line-height: 1.7;
-    }
-    main h1 {
-        color: #f2f2f0;
-        font-weight: 600;
-        letter-spacing: -0.01em;
-    }
-    main p {
-        color: rgba(242, 242, 240, 0.65);
-    }
-    main a {
-        color: #f2f2f0;
-        text-decoration: underline;
-        text-decoration-color: rgba(242, 242, 240, 0.3);
-        text-underline-offset: 3px;
-        transition: text-decoration-color 0.25s ease;
-    }
-    main a:hover {
-        text-decoration-color: #f2f2f0;
-    }
-    main code {
-        background: #141414;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        padding: 0.15em 0.4em;
-        border-radius: 3px;
-        font-size: 0.9em;
-        color: #e8b978;
-    }
-    main ul {
-        color: rgba(242, 242, 240, 0.65);
-    }
+	main {
+		width: auto;
+		max-width: none;
+		padding: 0;
+	}
+	.hero {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 4rem 2rem 2rem;
+		display: flex;
+		align-items: center;
+		min-height: 25vh;
+	}
+	.hero h1 {
+		font-size: clamp(2.75rem, 6vw, 4.5rem);
+		line-height: 1;
+		margin: 0;
+		font-weight: 600;
+		letter-spacing: -0.02em;
+		color: #f2f2f0;
+	}
+
+	.contact-section {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 2rem 2rem 8rem;
+	}
+	.contact-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 4rem;
+	}
+
+	h2 {
+		font-size: 1.4rem;
+		font-weight: 500;
+		letter-spacing: -0.01em;
+		color: #f2f2f0;
+		margin: 0 0 1rem;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+		padding-bottom: 1rem;
+	}
+
+	.contact-sub {
+		font-size: 0.95rem;
+		color: rgba(242, 242, 240, 0.6);
+		line-height: 1.6;
+		margin-bottom: 2rem;
+	}
+
+	.label {
+		display: block;
+		font-size: 0.75rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: rgba(242, 242, 240, 0.4);
+		margin-bottom: 0.4rem;
+	}
+
+	.email-block,
+	.location-block {
+		margin-bottom: 2rem;
+	}
+
+	.email-link {
+		font-size: 1.2rem;
+		color: #f2f2f0;
+		text-decoration: none;
+		font-weight: 500;
+		transition: opacity 0.2s ease;
+	}
+	.email-link:hover {
+		opacity: 0.7;
+	}
+
+	.location-block p {
+		margin: 0;
+		font-size: 1.1rem;
+		color: rgba(242, 242, 240, 0.85);
+	}
+
+	/* Social Buttons */
+	.social-buttons {
+		display: flex;
+		flex-direction: column;
+		gap: 0.85rem;
+	}
+
+	.social-btn {
+		display: flex;
+		align-items: center;
+		padding: 0.9rem 1.25rem;
+		background: #141414;
+		border: 1px solid rgba(255, 255, 255, 0.08);
+		border-radius: 6px;
+		color: #f2f2f0;
+		text-decoration: none;
+		transition: all 0.25s ease;
+	}
+
+	.social-btn:hover {
+		background: #1a1a1a;
+		border-color: rgba(255, 255, 255, 0.25);
+		transform: translateY(-2px);
+	}
+
+	.btn-icon {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-right: 1rem;
+		color: rgba(242, 242, 240, 0.7);
+	}
+
+	.btn-text {
+		font-size: 0.95rem;
+		font-weight: 500;
+		letter-spacing: 0.01em;
+		flex-grow: 1;
+	}
+
+	.btn-arrow {
+		font-size: 0.9rem;
+		color: rgba(242, 242, 240, 0.4);
+		transition: transform 0.25s ease, color 0.25s ease;
+	}
+
+	.social-btn:hover .btn-arrow {
+		color: #f2f2f0;
+		transform: translateX(4px);
+	}
+
+	@media (max-width: 900px) {
+		.hero {
+			padding: 3rem 1.5rem 2rem;
+		}
+		.contact-section {
+			padding: 2rem 1.5rem 6rem;
+		}
+		.contact-grid {
+			grid-template-columns: 1fr;
+			gap: 3rem;
+		}
+	}
 </style>
