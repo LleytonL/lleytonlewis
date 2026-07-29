@@ -4,11 +4,12 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
-const featuredWork = [
-	{ title: 'Project One', category: 'Short Film', href: '/work/project-one' },
-	{ title: 'Project Two', category: 'Commercial', href: '/work/project-two' },
-	{ title: 'Project Three', category: 'Music Video', href: '/work/project-three' },
-	{ title: 'Project Four', category: 'Documentary', href: '/work/project-four' },
+const socials = [
+	{ label: 'Instagram', href: '#' },
+	{ label: 'Instagram (Photo)', href: '#' },
+	{ label: 'YouTube', href: '#' },
+	{ label: 'X', href: '#' },
+	{ label: 'Letterboxd', href: '#' },
 ];
 ---
 <!doctype html>
@@ -26,6 +27,14 @@ const featuredWork = [
 					<p class="hero-sub">
 						Life's Purpose is Yours to Define - Based in Toronto.
 					</p>
+
+					<div class="social-buttons">
+						{socials.map((social) => (
+							<a class="social-btn" href={social.href} target="_blank" rel="noopener noreferrer">
+								{social.label}
+							</a>
+						))}
+					</div>
 				</div>
 
 				<img
@@ -37,22 +46,23 @@ const featuredWork = [
 
 			<section class="work" id="work">
 				<div class="work-header">
-					<h2>Selected Work</h2>
+					<h2>Most Recent Work</h2>
 					<a class="view-all" href="/work">View all &rarr;</a>
 				</div>
-				<div class="work-grid">
-					{featuredWork.map((project) => (
-						<a class="work-item" href={project.href}>
-							<div class="thumb">
-								<span class="thumb-label">Add thumbnail</span>
-							</div>
-							<div class="work-item-meta">
-								<h3>{project.title}</h3>
-								<p>{project.category}</p>
-							</div>
-						</a>
-					))}
-				</div>
+
+				<!-- ============================================ -->
+				<!-- 🎬 ADD YOUR MOST RECENT VIDEO/PHOTO HERE       -->
+				<!-- Replace .thumb div with a <video> or <img>     -->
+				<!-- ============================================ -->
+				<a class="recent-work" href="/work/most-recent-project">
+					<div class="thumb">
+						<span class="thumb-label">Add video or photo</span>
+					</div>
+					<div class="recent-work-meta">
+						<h3>Project Title</h3>
+						<p>Short Film</p>
+					</div>
+				</a>
 			</section>
 		</main>
 		<Footer />
@@ -96,6 +106,29 @@ const featuredWork = [
 		line-height: 1.6;
 		color: rgba(242, 242, 240, 0.65);
 	}
+	.social-buttons {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.6rem;
+		margin-top: 2rem;
+	}
+	.social-btn {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.55em 1em;
+		border: 1px solid rgba(255, 255, 255, 0.14);
+		border-radius: 100px;
+		color: rgba(242, 242, 240, 0.75);
+		font-size: 0.78rem;
+		letter-spacing: 0.03em;
+		text-decoration: none;
+		transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+	}
+	.social-btn:hover {
+		color: #f2f2f0;
+		border-color: rgba(232, 185, 120, 0.5);
+		background: rgba(232, 185, 120, 0.08);
+	}
 	.hero-image {
 		width: 100%;
 		aspect-ratio: 4 / 5;
@@ -134,18 +167,14 @@ const featuredWork = [
 	.view-all:hover {
 		color: #f2f2f0;
 	}
-	.work-grid {
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
-		gap: 2rem 1.5rem;
-	}
-	.work-item {
+	.recent-work {
+		display: block;
 		text-decoration: none;
 		color: inherit;
-		display: block;
+		max-width: 800px;
 	}
 	.thumb {
-		aspect-ratio: 16 / 10;
+		aspect-ratio: 16 / 9;
 		background: #141414;
 		border: 1px solid rgba(255, 255, 255, 0.06);
 		display: flex;
@@ -154,30 +183,30 @@ const featuredWork = [
 		overflow: hidden;
 		transition: border-color 0.25s ease;
 	}
-	.work-item:hover .thumb {
+	.recent-work:hover .thumb {
 		border-color: rgba(255, 255, 255, 0.2);
 	}
 	.thumb-label {
-		font-size: 0.75rem;
+		font-size: 0.8rem;
 		color: rgba(242, 242, 240, 0.3);
 		letter-spacing: 0.05em;
 		text-transform: uppercase;
 	}
-	.work-item-meta {
+	.recent-work-meta {
 		display: flex;
 		align-items: baseline;
 		justify-content: space-between;
-		margin-top: 0.85rem;
+		margin-top: 1rem;
 	}
-	.work-item-meta h3 {
+	.recent-work-meta h3 {
 		margin: 0;
-		font-size: 1rem;
+		font-size: 1.15rem;
 		font-weight: 500;
 		color: #f2f2f0;
 	}
-	.work-item-meta p {
+	.recent-work-meta p {
 		margin: 0;
-		font-size: 0.8rem;
+		font-size: 0.85rem;
 		color: rgba(242, 242, 240, 0.45);
 	}
 	@media (max-width: 900px) {
@@ -192,9 +221,6 @@ const featuredWork = [
 		}
 		.work {
 			padding: 2rem 1.5rem 6rem;
-		}
-		.work-grid {
-			grid-template-columns: 1fr;
 		}
 	}
 </style>
