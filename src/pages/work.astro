@@ -4,14 +4,50 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
+// ============================================================================
+// 📁 ADD YOUR WORK HERE
+// Place image files inside your project's `public/` folder.
+// Example: If an image is at `public/work/film.jpg`, use `image: '/work/film.jpg'`
+// ============================================================================
 const featuredWork = [
-	{ title: 'Project One', category: 'Short Film', type: 'Videos', href: '/work/project-one' },
-	{ title: 'Project Two', category: 'Commercial', type: 'Videos', href: '/work/project-two' },
-	{ title: 'Project Three', category: 'Music Video', type: 'Videos', href: '/work/project-three' },
-	{ title: 'Project Four', category: 'Documentary', type: 'Videos', href: '/work/project-four' },
-	{ title: 'Photo Series A', category: 'Editorial', type: 'Photos', href: '/work/photo-series-a' },
-	{ title: 'Photo Series B', category: 'Portrait', type: 'Photos', href: '/work/photo-series-b' },
+	{
+		title: 'Project One',
+		category: 'Short Film',
+		type: 'Video', // Options: 'Video' or 'Photo'
+		date: '2026-05-15', // Format: YYYY-MM-DD (used for sorting newest first)
+		href: '/work/project-one',
+		image: '/work/project-one-thumb.jpg', // Path inside public/ folder
+	},
+	{
+		title: 'Photo Series A',
+		category: 'Editorial',
+		type: 'Photo',
+		date: '2026-04-10',
+		href: '/work/photo-series-a',
+		image: '/work/photo-a-thumb.jpg',
+	},
+	{
+		title: 'Project Two',
+		category: 'Commercial',
+		type: 'Video',
+		date: '2026-02-01',
+		href: '/work/project-two',
+		image: '/work/project-two-thumb.jpg',
+	},
+	{
+		title: 'Photo Series B',
+		category: 'Portrait',
+		type: 'Photo',
+		date: '2025-11-20',
+		href: '/work/photo-series-b',
+		image: '/work/photo-b-thumb.jpg',
+	},
 ];
+
+// Automatically sort all work from newest to oldest by date
+const sortedWork = [...featuredWork].sort(
+	(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+);
 ---
 <!doctype html>
 <html lang="en">
@@ -34,22 +70,38 @@ const featuredWork = [
 					<!-- Filter Controls -->
 					<div class="filter-tabs">
 						<button class="filter-btn active" data-filter="all">All</button>
-						<button class="filter-btn" data-filter="Videos">Videos</button>
-						<button class="filter-btn" data-filter="Photos">Photos</button>
+						<button class="filter-btn" data-filter="Video">Videos</button>
+						<button class="filter-btn" data-filter="Photo">Photos</button>
 					</div>
 
-					<a Updated as of: <span id="current-date"></span></a>
+					<!-- Fixed Updated Date Display -->
+					<div class="updated-at">
+						Updated as of: <span id="current-date">July 2026</span>
+					</div>
 				</div>
 
 				<div class="work-grid">
-					{featuredWork.map((project) => (
+					{sortedWork.map((project) => (
 						<a class="work-item" href={project.href} data-type={project.type}>
 							<div class="thumb">
-								<span class="thumb-label">Add thumbnail</span>
+								{project.image ? (
+									<img src={project.image} alt={project.title} loading="lazy" />
+								) : (
+									<span class="thumb-label">No Thumbnail</span>
+								)}
+								<span class="type-badge">{project.type}</span>
 							</div>
 							<div class="work-item-meta">
-								<h3>{project.title}</h3>
-								<p>{project.category}</p>
+								<div>
+									<h3>{project.title}</h3>
+									<p>{project.category}</p>
+								</div>
+								<time datetime={project.date}>
+									{new Date(project.date).toLocaleDateString('en-US', {
+										year: 'numeric',
+										month: 'short'
+									})}
+								</time>
 							</div>
 						</a>
 					))}
@@ -59,19 +111,28 @@ const featuredWork = [
 		<Footer />
 
 		<script>
+			// Set current date dynamically on client load
+			const dateSpan = document.getElementById('current-date');
+			if (dateSpan) {
+				const today = new Date();
+				dateSpan.textContent = today.toLocaleDateString('en-US', {
+					year: 'numeric',
+					month: 'long',
+					day: 'numeric'
+				});
+			}
+
 			// Client-side filtering logic
 			const filterBtns = document.querySelectorAll('.filter-btn');
 			const workItems = document.querySelectorAll('.work-item');
 
 			filterBtns.forEach(btn => {
 				btn.addEventListener('click', () => {
-					// Toggle active tab styling
 					filterBtns.forEach(b => b.classList.remove('active'));
 					btn.classList.add('active');
 
 					const filterValue = btn.getAttribute('data-filter');
 
-					// Show/hide grid items based on selected category
 					workItems.forEach(item => {
 						const itemType = item.getAttribute('data-type');
 						if (filterValue === 'all' || itemType === filterValue) {
@@ -98,7 +159,7 @@ const featuredWork = [
 		padding: 4rem 2rem 2rem;
 		display: flex;
 		align-items: center;
-		min-height: 30vh;
+		min-height: 25vh;
 	}
 	.hero h1 {
 		font-size: clamp(2.75rem, 6vw, 4.5rem);
@@ -132,7 +193,6 @@ const featuredWork = [
 		color: #f2f2f0;
 	}
 
-	/* Filter Tab Styles */
 	.filter-tabs {
 		display: flex;
 		gap: 0.5rem;
@@ -158,21 +218,20 @@ const featuredWork = [
 		font-weight: 500;
 	}
 
-	.view-all {
+	/* Updated Date Tag Styling */
+	.updated-at {
 		font-size: 0.85rem;
-		color: rgba(242, 242, 240, 0.55);
-		text-decoration: none;
-		letter-spacing: 0.03em;
-		transition: color 0.25s ease;
+		color: rgba(242, 242, 240, 0.5);
+		letter-spacing: 0.02em;
 	}
-	.view-all:hover {
+	.updated-at span {
 		color: #f2f2f0;
 	}
 
 	.work-grid {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
-		gap: 2rem 1.5rem;
+		gap: 2.5rem 1.5rem;
 	}
 	.work-item {
 		text-decoration: none;
@@ -180,6 +239,7 @@ const featuredWork = [
 		display: block;
 	}
 	.thumb {
+		position: relative;
 		aspect-ratio: 16 / 10;
 		background: #141414;
 		border: 1px solid rgba(255, 255, 255, 0.06);
@@ -188,6 +248,16 @@ const featuredWork = [
 		justify-content: center;
 		overflow: hidden;
 		transition: border-color 0.25s ease;
+		border-radius: 4px;
+	}
+	.thumb img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.3s ease;
+	}
+	.work-item:hover .thumb img {
+		transform: scale(1.03);
 	}
 	.work-item:hover .thumb {
 		border-color: rgba(255, 255, 255, 0.2);
@@ -198,9 +268,25 @@ const featuredWork = [
 		letter-spacing: 0.05em;
 		text-transform: uppercase;
 	}
+	
+	.type-badge {
+		position: absolute;
+		top: 0.75rem;
+		right: 0.75rem;
+		background: rgba(20, 20, 20, 0.75);
+		backdrop-filter: blur(4px);
+		color: rgba(242, 242, 240, 0.8);
+		font-size: 0.7rem;
+		padding: 0.25rem 0.5rem;
+		border-radius: 3px;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+	}
+
 	.work-item-meta {
 		display: flex;
-		align-items: baseline;
+		align-items: flex-start;
 		justify-content: space-between;
 		margin-top: 0.85rem;
 	}
@@ -211,15 +297,18 @@ const featuredWork = [
 		color: #f2f2f0;
 	}
 	.work-item-meta p {
-		margin: 0;
+		margin: 0.2rem 0 0;
 		font-size: 0.8rem;
 		color: rgba(242, 242, 240, 0.45);
+	}
+	.work-item-meta time {
+		font-size: 0.8rem;
+		color: rgba(242, 242, 240, 0.35);
 	}
 
 	@media (max-width: 900px) {
 		.hero {
 			padding: 3rem 1.5rem 2rem;
-			min-height: auto;
 		}
 		.work {
 			padding: 2rem 1.5rem 6rem;
