@@ -9,7 +9,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 // Update your email and profile URLs here
 // ============================================================================
 const contactInfo = {
-	primaryEmail: 'bwlewerlleyton@gmail.com',
+	primaryEmail: 'No Accessible Email',
 	workEmail: 'No Accessible Phone Number',
 	location: 'Toronto, Canada',
 };
@@ -68,9 +68,7 @@ const socialLinks = [
 
 						<div class="email-block">
 							<span class="label">Email</span>
-							<a href={`mailto:${contactInfo.primaryEmail}`} class="email-link">
-								{contactInfo.primaryEmail} &rarr;
-							</a>
+    						<p class="contact-value" style="color: #a32a2a;">{contactInfo.workEmail}</p>
 						</div>
 
 						<div class="location-block">
