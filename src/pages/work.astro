@@ -4,7 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
-// Initial preloaded project items
+// Preloaded items (Replace image paths with your actual public/ folder files)
 const initialWork = [
 	{
 		id: '1',
@@ -13,7 +13,7 @@ const initialWork = [
 		type: 'Video',
 		date: '2026-05-15',
 		description: 'A visual exploration of narrative structure.',
-		youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+		youtubeUrl: '', // Add your YouTube video link here
 		image: '',
 	},
 	{
@@ -24,7 +24,7 @@ const initialWork = [
 		date: '2026-04-10',
 		description: '35mm portraiture set in Toronto.',
 		youtubeUrl: '',
-		image: '/work/photo-a-thumb.jpg',
+		image: '', // Add local path like '/work/photo-a.jpg'
 	},
 	{
 		id: '3',
@@ -33,7 +33,7 @@ const initialWork = [
 		type: 'Video',
 		date: '2026-02-01',
 		description: 'Brand commercial visual design.',
-		youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+		youtubeUrl: '',
 		image: '',
 	},
 	{
@@ -44,7 +44,7 @@ const initialWork = [
 		date: '2025-11-20',
 		description: 'Studio light setup series.',
 		youtubeUrl: '',
-		image: '/work/photo-b-thumb.jpg',
+		image: '',
 	},
 ];
 ---
@@ -157,11 +157,9 @@ const initialWork = [
 		<Footer />
 
 		<script is:inline define:vars={{ initialWork }}>
-			// Client-Side State Management
 			let workItems = [...initialWork];
 			let activeFilter = 'all';
 
-			// Helper to extract embeddable YouTube ID
 			function getYouTubeEmbedUrl(url) {
 				if (!url) return '';
 				const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
@@ -171,12 +169,10 @@ const initialWork = [
 					: url;
 			}
 
-			// Render items sorted by date (newest first)
 			function renderWork() {
 				const container = document.getElementById('work-grid');
 				if (!container) return;
 
-				// Sort newest first
 				const sorted = [...workItems].sort(
 					(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
 				);
@@ -215,7 +211,7 @@ const initialWork = [
 					} else {
 						mediaHTML = `
 							<div class="thumb">
-								<span class="thumb-label">No Media</span>
+								<span class="thumb-label">No Media Uploaded</span>
 								<span class="type-badge">${item.type}</span>
 							</div>
 						`;
@@ -230,7 +226,7 @@ const initialWork = [
 					card.innerHTML = `
 						${mediaHTML}
 						<div class="work-item-meta">
-							<div>
+							<div class="meta-main">
 								<h3>${item.title}</h3>
 								<p class="category">${item.category}</p>
 								${item.description ? `<p class="description">${item.description}</p>` : ''}
@@ -243,7 +239,6 @@ const initialWork = [
 				});
 			}
 
-			// Set current date
 			const dateSpan = document.getElementById('current-date');
 			if (dateSpan) {
 				const today = new Date();
@@ -254,7 +249,6 @@ const initialWork = [
 				});
 			}
 
-			// Filter button behavior
 			const filterBtns = document.querySelectorAll('.filter-btn');
 			filterBtns.forEach(btn => {
 				btn.addEventListener('click', () => {
@@ -265,7 +259,6 @@ const initialWork = [
 				});
 			});
 
-			// Modal & Password Protection
 			const modal = document.getElementById('upload-modal');
 			const openBtn = document.getElementById('open-modal-btn');
 			const closeBtn = document.getElementById('close-modal-btn');
@@ -302,7 +295,6 @@ const initialWork = [
 				});
 			});
 
-			// Submit Form Logic with Direct Computer File Reader
 			form?.addEventListener('submit', (e) => {
 				e.preventDefault();
 
@@ -347,14 +339,12 @@ const initialWork = [
 				workItems.push(newItem);
 				renderWork();
 
-				// Reset form and close modal
 				form.reset();
 				ytField?.classList.remove('hidden');
 				imgField?.classList.add('hidden');
 				modal?.classList.remove('active');
 			}
 
-			// Initial execution
 			renderWork();
 		</script>
 	</body>
@@ -372,7 +362,7 @@ const initialWork = [
 		padding: 4rem 2rem 2rem;
 		display: flex;
 		align-items: center;
-		min-height: 25vh;
+		min-height: 20vh;
 	}
 	.hero h1 {
 		font-size: clamp(2.75rem, 6vw, 4.5rem);
@@ -392,7 +382,7 @@ const initialWork = [
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		margin-bottom: 2rem;
+		margin-bottom: 2.5rem;
 		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 		padding-bottom: 1.25rem;
 		gap: 1rem;
@@ -443,7 +433,7 @@ const initialWork = [
 	.work-grid {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
-		gap: 2.5rem 1.5rem;
+		gap: 3.5rem 2rem;
 	}
 
 	.work-card {
@@ -451,13 +441,12 @@ const initialWork = [
 		flex-direction: column;
 	}
 
-	/* Video Embed Container */
 	.video-embed-wrapper {
 		position: relative;
 		width: 100%;
 		aspect-ratio: 16 / 9;
 		background: #141414;
-		border-radius: 4px;
+		border-radius: 6px;
 		overflow: hidden;
 		border: 1px solid rgba(255, 255, 255, 0.08);
 	}
@@ -472,19 +461,21 @@ const initialWork = [
 
 	.thumb {
 		position: relative;
+		width: 100%;
 		aspect-ratio: 16 / 10;
 		background: #141414;
-		border: 1px solid rgba(255, 255, 255, 0.06);
+		border: 1px solid rgba(255, 255, 255, 0.08);
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		overflow: hidden;
-		border-radius: 4px;
+		border-radius: 6px;
 	}
 	.thumb img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+		display: block;
 	}
 	.thumb-label {
 		font-size: 0.75rem;
@@ -497,7 +488,7 @@ const initialWork = [
 		position: absolute;
 		top: 0.75rem;
 		right: 0.75rem;
-		background: rgba(20, 20, 20, 0.75);
+		background: rgba(20, 20, 20, 0.85);
 		backdrop-filter: blur(4px);
 		color: rgba(242, 242, 240, 0.8);
 		font-size: 0.7rem;
@@ -512,30 +503,36 @@ const initialWork = [
 		display: flex;
 		align-items: flex-start;
 		justify-content: space-between;
-		margin-top: 0.85rem;
+		margin-top: 1rem;
+		gap: 1rem;
+	}
+	.meta-main {
+		display: flex;
+		flex-direction: column;
 	}
 	.work-item-meta h3 {
 		margin: 0;
-		font-size: 1rem;
-		font-weight: 500;
+		font-size: 1.25rem;
+		font-weight: 600;
 		color: #f2f2f0;
+		letter-spacing: -0.01em;
 	}
 	.work-item-meta .category {
-		margin: 0.2rem 0 0;
-		font-size: 0.8rem;
-		color: rgba(242, 242, 240, 0.45);
+		margin: 0.25rem 0 0;
+		font-size: 0.85rem;
+		color: rgba(242, 242, 240, 0.5);
 	}
 	.work-item-meta .description {
-		margin: 0.4rem 0 0;
-		font-size: 0.82rem;
+		margin: 0.5rem 0 0;
+		font-size: 0.88rem;
 		line-height: 1.4;
-		color: rgba(242, 242, 240, 0.6);
+		color: rgba(242, 242, 240, 0.65);
 	}
 	.work-item-meta time {
-		font-size: 0.8rem;
-		color: rgba(242, 242, 240, 0.35);
+		font-size: 0.82rem;
+		color: rgba(242, 242, 240, 0.4);
 		white-space: nowrap;
-		margin-left: 0.5rem;
+		padding-top: 0.2rem;
 	}
 
 	/* Floating Action Button (FAB) */
@@ -553,7 +550,7 @@ const initialWork = [
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 		transition: transform 0.2s ease, background 0.2s ease;
 		z-index: 100;
 	}
@@ -569,7 +566,7 @@ const initialWork = [
 		left: 0;
 		width: 100vw;
 		height: 100vh;
-		background: rgba(0, 0, 0, 0.75);
+		background: rgba(0, 0, 0, 0.8);
 		backdrop-filter: blur(6px);
 		display: flex;
 		align-items: center;
