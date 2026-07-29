@@ -26,11 +26,11 @@ const focusAreas = [
 ];
 
 const kitList = [
-	'Apple MacBook Air',
-	'Windows Desktop',
-	'DaVinci Resolve',
-	'Sony Cameras',
-	'Shure MV7 Microphone'
+	'Digital & Cinema Systems',
+	'35mm Film Cameras',
+	'Prime Lenses',
+	'Color Grading (DaVinci Resolve)',
+	'Adobe Creative Cloud'
 ];
 ---
 
@@ -54,7 +54,7 @@ const kitList = [
 				</p>
 			</section>
 
-			<!-- Profile & Bio Section -->
+			<!-- Profile & Stats Grid -->
 			<section class="about-grid">
 				<div class="portrait-wrapper">
 					<img 
@@ -70,8 +70,7 @@ const kitList = [
 				</div>
 
 				<div class="bio-content">
-
-					<!-- Stats Bar -->
+					<!-- Compact Stats Bar -->
 					<div class="stats-row">
 						{stats.map((stat) => (
 							<div class="stat-item">
@@ -83,11 +82,29 @@ const kitList = [
 				</div>
 			</section>
 
+			<!-- Compact Focus Areas Section -->
+			<section class="focus-section">
+				<div class="section-title">
+					<h2>Core Focus</h2>
+					<p>What I bring to every project</p>
+				</div>
+
+				<div class="focus-grid">
+					{focusAreas.map((area, index) => (
+						<div class="focus-card">
+							<span class="card-num">0{index + 1}</span>
+							<h3>{area.title}</h3>
+							<p>{area.description}</p>
+						</div>
+					))}
+				</div>
+			</section>
+
 			<!-- Toolkit / Equipment Section -->
 			<section class="kit-section">
 				<div class="kit-header">
 					<h2>Tools &amp; Capabilities</h2>
-					<p>Here are the mediums I use in my production workflows.</p>
+					<p>Key mediums and software used across production workflows.</p>
 				</div>
 				<div class="kit-tags">
 					{kitList.map((item) => (
@@ -96,6 +113,14 @@ const kitList = [
 				</div>
 			</section>
 
+			<!-- Call to Action Banner -->
+			<section class="cta-section">
+				<div class="cta-card">
+					<h2>Have a project in mind?</h2>
+					<p>Available for freelance film work, editorial photography, and collaborations in Toronto and beyond.</p>
+					<a href="/contact" class="cta-btn">Get in Touch &rarr;</a>
+				</div>
+			</section>
 		</main>
 
 		<Footer />
@@ -111,51 +136,52 @@ const kitList = [
 
 	/* Hero Header */
 	.about-hero {
-		max-width: 1200px;
+		max-width: 1000px;
 		margin: 0 auto;
-		padding: 4rem 2rem 3rem;
+		padding: 3.5rem 2rem 2rem;
 	}
 
 	.eyebrow {
 		text-transform: uppercase;
 		letter-spacing: 0.15em;
-		font-size: 0.8rem;
+		font-size: 0.78rem;
 		color: rgba(242, 242, 240, 0.5);
-		margin: 0 0 1rem;
+		margin: 0 0 0.75rem;
 	}
 
 	.about-hero h1 {
-		font-size: clamp(2.75rem, 6vw, 4.5rem);
+		font-size: clamp(2.5rem, 5vw, 3.75rem);
 		line-height: 1.05;
-		margin: 0 0 1.25rem;
+		margin: 0 0 1rem;
 		font-weight: 600;
 		letter-spacing: -0.02em;
 		color: #f2f2f0;
 	}
 
 	.lead {
-		font-size: clamp(1.1rem, 2vw, 1.35rem);
-		line-height: 1.5;
+		font-size: clamp(1rem, 1.8vw, 1.2rem);
+		line-height: 1.55;
 		color: rgba(242, 242, 240, 0.75);
-		max-width: 36ch;
+		max-width: 42ch;
 		margin: 0;
 	}
 
-	/* Grid Layout */
+	/* Grid Layout with Scaled Down Portrait */
 	.about-grid {
-		max-width: 1200px;
+		max-width: 1000px;
 		margin: 0 auto;
-		padding: 2rem 2rem 6rem;
+		padding: 1.5rem 2rem 3.5rem;
 		display: grid;
-		grid-template-columns: 0.9fr 1.1fr;
-		gap: 4rem;
-		align-items: start;
+		grid-template-columns: 280px 1fr;
+		gap: 3rem;
+		align-items: center;
 	}
 
 	.portrait-wrapper {
 		display: flex;
 		flex-direction: column;
-		gap: 0.8rem;
+		gap: 0.6rem;
+		max-width: 280px;
 	}
 
 	.portrait-img {
@@ -169,87 +195,70 @@ const kitList = [
 	.portrait-caption {
 		display: flex;
 		align-items: center;
-		gap: 0.5rem;
-		font-size: 0.78rem;
+		gap: 0.4rem;
+		font-size: 0.75rem;
 		color: rgba(242, 242, 240, 0.45);
 		letter-spacing: 0.03em;
 	}
 
 	.portrait-caption .dot {
-		width: 4px;
-		height: 4px;
+		width: 3px;
+		height: 3px;
 		background: rgba(242, 242, 240, 0.3);
 		border-radius: 50%;
 	}
 
-	/* Bio Column */
-	.bio-content h2 {
-		font-size: 1.6rem;
-		font-weight: 500;
-		color: #f2f2f0;
-		letter-spacing: -0.01em;
-		margin: 0 0 1.5rem;
-	}
-
-	.bio-content p {
-		font-size: 1.02rem;
-		line-height: 1.7;
-		color: rgba(242, 242, 240, 0.65);
-		margin-bottom: 1.25rem;
-	}
-
-	/* Stats Row */
+	/* Compact Stats Row */
 	.stats-row {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
-		gap: 1rem;
-		margin-top: 3rem;
-		padding-top: 2rem;
-		border-top: 1px solid rgba(255, 255, 255, 0.08);
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+		padding-left: 1rem;
+		border-left: 1px solid rgba(255, 255, 255, 0.08);
 	}
 
 	.stat-item {
 		display: flex;
 		flex-direction: column;
-		gap: 0.25rem;
+		gap: 0.15rem;
 	}
 
 	.stat-value {
-		font-size: 1.1rem;
+		font-size: 1.05rem;
 		font-weight: 600;
 		color: #f2f2f0;
 		letter-spacing: -0.01em;
 	}
 
 	.stat-label {
-		font-size: 0.72rem;
+		font-size: 0.7rem;
 		color: rgba(242, 242, 240, 0.45);
 		text-transform: uppercase;
 		letter-spacing: 0.05em;
 	}
 
-	/* Focus Section */
+	/* Focus Section - Compact Grid */
 	.focus-section {
-		max-width: 1200px;
+		max-width: 1000px;
 		margin: 0 auto;
-		padding: 4rem 2rem 6rem;
+		padding: 3rem 2rem 4rem;
 		border-top: 1px solid rgba(255, 255, 255, 0.08);
 	}
 
 	.section-title {
-		margin-bottom: 3rem;
+		margin-bottom: 2rem;
 	}
 
 	.section-title h2 {
-		font-size: 1.6rem;
+		font-size: 1.4rem;
 		font-weight: 500;
 		color: #f2f2f0;
-		margin: 0 0 0.35rem;
+		margin: 0 0 0.25rem;
 		letter-spacing: -0.01em;
 	}
 
 	.section-title p {
-		font-size: 0.88rem;
+		font-size: 0.82rem;
 		color: rgba(242, 242, 240, 0.45);
 		margin: 0;
 	}
@@ -257,14 +266,14 @@ const kitList = [
 	.focus-grid {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-		gap: 1.25rem;
+		gap: 1rem;
 	}
 
 	.focus-card {
-		padding: 2rem 1.75rem;
+		padding: 1.25rem 1.25rem;
 		background: rgba(255, 255, 255, 0.02);
 		border: 1px solid rgba(255, 255, 255, 0.06);
-		border-radius: 12px;
+		border-radius: 10px;
 		display: flex;
 		flex-direction: column;
 		transition: border-color 0.25s ease, background 0.25s ease;
@@ -277,46 +286,46 @@ const kitList = [
 
 	.card-num {
 		font-family: monospace;
-		font-size: 0.75rem;
+		font-size: 0.7rem;
 		color: rgba(232, 185, 120, 0.8);
-		margin-bottom: 1.5rem;
+		margin-bottom: 0.75rem;
 	}
 
 	.focus-card h3 {
-		font-size: 1.15rem;
+		font-size: 1rem;
 		font-weight: 500;
 		color: #f2f2f0;
-		margin: 0 0 0.75rem;
+		margin: 0 0 0.5rem;
 		letter-spacing: -0.01em;
 	}
 
 	.focus-card p {
-		font-size: 0.88rem;
-		line-height: 1.6;
+		font-size: 0.82rem;
+		line-height: 1.5;
 		color: rgba(242, 242, 240, 0.55);
 		margin: 0;
 	}
 
 	/* Kit / Capabilities Section */
 	.kit-section {
-		max-width: 1200px;
+		max-width: 1000px;
 		margin: 0 auto;
-		padding: 0 2rem 6rem;
+		padding: 0 2rem 4rem;
 	}
 
 	.kit-header {
-		margin-bottom: 1.5rem;
+		margin-bottom: 1.25rem;
 	}
 
 	.kit-header h2 {
-		font-size: 1.3rem;
+		font-size: 1.2rem;
 		font-weight: 500;
 		color: #f2f2f0;
-		margin: 0 0 0.35rem;
+		margin: 0 0 0.25rem;
 	}
 
 	.kit-header p {
-		font-size: 0.85rem;
+		font-size: 0.82rem;
 		color: rgba(242, 242, 240, 0.45);
 		margin: 0;
 	}
@@ -324,39 +333,39 @@ const kitList = [
 	.kit-tags {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.6rem;
+		gap: 0.5rem;
 	}
 
 	.kit-tag {
-		padding: 0.55em 1em;
+		padding: 0.45em 0.85em;
 		background: rgba(255, 255, 255, 0.03);
 		border: 1px solid rgba(255, 255, 255, 0.08);
 		border-radius: 100px;
-		font-size: 0.8rem;
+		font-size: 0.78rem;
 		color: rgba(242, 242, 240, 0.7);
 		letter-spacing: 0.02em;
 	}
 
 	/* CTA Banner */
 	.cta-section {
-		max-width: 1200px;
+		max-width: 1000px;
 		margin: 0 auto;
-		padding: 0 2rem 8rem;
+		padding: 0 2rem 6rem;
 	}
 
 	.cta-card {
-		padding: 3.5rem 3rem;
+		padding: 2.5rem 2rem;
 		background: radial-gradient(circle at top left, rgba(232, 185, 120, 0.08), transparent 60%), rgba(255, 255, 255, 0.02);
 		border: 1px solid rgba(255, 255, 255, 0.08);
-		border-radius: 16px;
+		border-radius: 12px;
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
-		gap: 1rem;
+		gap: 0.85rem;
 	}
 
 	.cta-card h2 {
-		font-size: 1.8rem;
+		font-size: 1.5rem;
 		font-weight: 500;
 		color: #f2f2f0;
 		margin: 0;
@@ -364,9 +373,9 @@ const kitList = [
 	}
 
 	.cta-card p {
-		font-size: 1rem;
+		font-size: 0.92rem;
 		color: rgba(242, 242, 240, 0.6);
-		margin: 0 0 0.5rem;
+		margin: 0 0 0.25rem;
 		max-width: 48ch;
 		line-height: 1.5;
 	}
@@ -374,11 +383,11 @@ const kitList = [
 	.cta-btn {
 		display: inline-flex;
 		align-items: center;
-		padding: 0.7em 1.4em;
+		padding: 0.6em 1.2em;
 		background: #f2f2f0;
 		color: #080808;
 		border-radius: 100px;
-		font-size: 0.85rem;
+		font-size: 0.82rem;
 		font-weight: 600;
 		text-decoration: none;
 		letter-spacing: 0.02em;
@@ -391,23 +400,25 @@ const kitList = [
 	}
 
 	/* Responsive Breakpoints */
-	@media (max-width: 900px) {
+	@media (max-width: 800px) {
 		.about-grid {
 			grid-template-columns: 1fr;
-			gap: 2.5rem;
+			gap: 2rem;
+		}
+
+		.portrait-wrapper {
+			max-width: 220px;
+		}
+
+		.stats-row {
+			border-left: none;
+			padding-left: 0;
+			border-top: 1px solid rgba(255, 255, 255, 0.08);
+			padding-top: 1.25rem;
 		}
 
 		.focus-grid {
 			grid-template-columns: 1fr;
-		}
-
-		.stats-row {
-			grid-template-columns: 1fr;
-			gap: 1.25rem;
-		}
-
-		.cta-card {
-			padding: 2.5rem 1.75rem;
 		}
 	}
 </style>
