@@ -51,12 +51,8 @@ const socials = [
 				<div class="hero-text">
 					<p class="eyebrow">Filmmaker &amp; Photographer</p>
 					<h1>Lleyton Lewis</h1>
-					<br />
-					<p class="eyebrow">
-						Based in Toronto, Canada
-					</p>
+					<p class="eyebrow">Based in Toronto, Canada</p>
 
-					<!-- Icon Cards with Labels Underneath -->
 					<div class="social-grid">
 						{socials.map((social) => (
 							<a class="social-card" href={social.href} target="_blank" rel="noopener noreferrer">
@@ -159,15 +155,12 @@ const socials = [
 		letter-spacing: -0.02em;
 		color: #f2f2f0;
 	}
-
-	/* Social Cards Grid */
 	.social-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
 		gap: 0.75rem;
 		margin-top: 2.5rem;
 	}
-
 	.social-card {
 		display: flex;
 		flex-direction: column;
@@ -179,13 +172,11 @@ const socials = [
 		text-decoration: none;
 		transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 	}
-
 	.social-card:hover {
 		background: rgba(255, 255, 255, 0.06);
 		border-color: rgba(255, 255, 255, 0.2);
 		transform: translateY(-2px);
 	}
-
 	.icon-wrapper {
 		width: 34px;
 		height: 34px;
@@ -198,31 +189,26 @@ const socials = [
 		margin-bottom: 0.75rem;
 		transition: color 0.25s ease, background 0.25s ease;
 	}
-
 	.social-card:hover .icon-wrapper {
 		color: #f2f2f0;
 		background: rgba(232, 185, 120, 0.15);
 	}
-
 	.label-block {
 		display: flex;
 		flex-direction: column;
 		gap: 0.15rem;
 	}
-
 	.social-title {
 		font-size: 0.82rem;
 		font-weight: 500;
 		color: #f2f2f0;
 		letter-spacing: -0.01em;
 	}
-
 	.social-sub {
 		font-size: 0.68rem;
 		color: rgba(242, 242, 240, 0.45);
 		line-height: 1.2;
 	}
-
 	.hero-image {
 		width: 100%;
 		aspect-ratio: 4 / 5;
@@ -230,7 +216,6 @@ const socials = [
 		border-radius: 4px;
 		display: block;
 	}
-
 	.work {
 		max-width: 1200px;
 		margin: 0 auto;
@@ -261,12 +246,9 @@ const socials = [
 	.view-all:hover {
 		color: #f2f2f0;
 	}
-
-	/* Embedded Video Container */
 	.recent-work-container {
 		max-width: 900px;
 	}
-
 	.video-embed-wrapper {
 		position: relative;
 		width: 100%;
@@ -276,7 +258,6 @@ const socials = [
 		overflow: hidden;
 		border: 1px solid rgba(255, 255, 255, 0.08);
 	}
-
 	.video-embed-wrapper iframe {
 		position: absolute;
 		top: 0;
@@ -285,7 +266,6 @@ const socials = [
 		height: 100%;
 		border: 0;
 	}
-
 	.recent-work-meta {
 		display: flex;
 		align-items: baseline;
