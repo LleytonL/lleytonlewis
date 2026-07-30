@@ -4,10 +4,6 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
-// ============================================================================
-// ✉️ CONTACT DETAILS & SOCIAL LINKS
-// Update your email and profile URLs here
-// ============================================================================
 const contactInfo = {
 	primaryEmail: 'No Accessible Email',
 	workEmail: 'No Accessible Phone Number',
@@ -59,7 +55,6 @@ const socialLinks = [
 
 			<section class="contact-section">
 				<div class="contact-grid">
-					<!-- Email / Direct Contact -->
 					<div class="direct-contact">
 						<h2>Contact</h2>
 						<p class="contact-sub">
@@ -68,12 +63,12 @@ const socialLinks = [
 
 						<div class="location-block">
 							<span class="label">Email</span>
-    						<p class="contact-value" style="color: #a32a2a;">{contactInfo.primaryEmail}</p>
+							<p class="contact-value" style="color: #a32a2a;">{contactInfo.primaryEmail}</p>
 						</div>
 
 						<div class="location-block">
-    						<span class="label">Phone Number</span>
-    						<p class="contact-value" style="color: #a32a2a;">{contactInfo.workEmail}</p>
+							<span class="label">Phone Number</span>
+							<p class="contact-value" style="color: #a32a2a;">{contactInfo.workEmail}</p>
 						</div>
 
 						<div class="location-block">
@@ -82,7 +77,6 @@ const socialLinks = [
 						</div>
 					</div>
 
-					<!-- Social Buttons -->
 					<div class="socials-contact">
 						<h2>Connect</h2>
 						<p class="contact-sub">Find my work across these platforms.</p>
@@ -152,7 +146,6 @@ const socialLinks = [
 		letter-spacing: -0.02em;
 		color: #f2f2f0;
 	}
-
 	.contact-section {
 		max-width: 1200px;
 		margin: 0 auto;
@@ -163,7 +156,6 @@ const socialLinks = [
 		grid-template-columns: 1fr 1fr;
 		gap: 4rem;
 	}
-
 	h2 {
 		font-size: 1.4rem;
 		font-weight: 500;
@@ -173,14 +165,12 @@ const socialLinks = [
 		border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 		padding-bottom: 1rem;
 	}
-
 	.contact-sub {
 		font-size: 0.95rem;
 		color: rgba(242, 242, 240, 0.6);
 		line-height: 1.6;
 		margin-bottom: 2rem;
 	}
-
 	.label {
 		display: block;
 		font-size: 0.75rem;
@@ -189,36 +179,19 @@ const socialLinks = [
 		color: rgba(242, 242, 240, 0.4);
 		margin-bottom: 0.4rem;
 	}
-
-	.email-block,
 	.location-block {
 		margin-bottom: 2rem;
 	}
-
-	.email-link {
-		font-size: 1.2rem;
-		color: #f2f2f0;
-		text-decoration: none;
-		font-weight: 500;
-		transition: opacity 0.2s ease;
-	}
-	.email-link:hover {
-		opacity: 0.7;
-	}
-
 	.location-block p {
 		margin: 0;
 		font-size: 1.1rem;
 		color: rgba(242, 242, 240, 0.85);
 	}
-
-	/* Social Buttons */
 	.social-buttons {
 		display: flex;
 		flex-direction: column;
 		gap: 0.85rem;
 	}
-
 	.social-btn {
 		display: flex;
 		align-items: center;
@@ -230,13 +203,11 @@ const socialLinks = [
 		text-decoration: none;
 		transition: all 0.25s ease;
 	}
-
 	.social-btn:hover {
 		background: #1a1a1a;
 		border-color: rgba(255, 255, 255, 0.25);
 		transform: translateY(-2px);
 	}
-
 	.btn-icon {
 		display: flex;
 		align-items: center;
@@ -244,20 +215,17 @@ const socialLinks = [
 		margin-right: 1rem;
 		color: rgba(242, 242, 240, 0.7);
 	}
-
 	.btn-text {
 		font-size: 0.95rem;
 		font-weight: 500;
 		letter-spacing: 0.01em;
 		flex-grow: 1;
 	}
-
 	.btn-arrow {
 		font-size: 0.9rem;
 		color: rgba(242, 242, 240, 0.4);
 		transition: transform 0.25s ease, color 0.25s ease;
 	}
-
 	.social-btn:hover .btn-arrow {
 		color: #f2f2f0;
 		transform: translateX(4px);
