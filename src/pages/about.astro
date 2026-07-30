@@ -30,7 +30,6 @@ const kitList = [
 		<Header />
 
 		<main>
-			<!-- Hero Header -->
 			<section class="about-hero">
 				<p class="eyebrow">03 / About</p>
 				<h1>About Me</h1>
@@ -39,7 +38,6 @@ const kitList = [
 				</p>
 			</section>
 
-			<!-- Profile & Bio Section -->
 			<section class="about-grid">
 				<div class="portrait-wrapper">
 					<img 
@@ -55,7 +53,6 @@ const kitList = [
 				</div>
 
 				<div class="bio-content">
-					<!-- Stats Row -->
 					<div class="stats-row">
 						{stats.map((stat) => (
 							<div class="stat-item">
@@ -67,7 +64,6 @@ const kitList = [
 				</div>
 			</section>
 
-			<!-- Toolkit / Equipment Section -->
 			<section class="kit-section">
 				<div class="kit-header">
 					<h2>Tools &amp; Capabilities</h2>
@@ -91,14 +87,11 @@ const kitList = [
 		max-width: none;
 		padding: 0;
 	}
-
-	/* Hero Header */
 	.about-hero {
 		max-width: 900px;
 		margin: 0 auto;
 		padding: 4rem 2rem 2.5rem;
 	}
-
 	.eyebrow {
 		text-transform: uppercase;
 		letter-spacing: 0.15em;
@@ -106,7 +99,6 @@ const kitList = [
 		color: rgba(242, 242, 240, 0.5);
 		margin: 0 0 1rem;
 	}
-
 	.about-hero h1 {
 		font-size: clamp(2.75rem, 6vw, 4.5rem);
 		line-height: 1.05;
@@ -115,7 +107,6 @@ const kitList = [
 		letter-spacing: -0.02em;
 		color: #f2f2f0;
 	}
-
 	.lead {
 		font-size: clamp(1.1rem, 2vw, 1.35rem);
 		line-height: 1.5;
@@ -123,8 +114,6 @@ const kitList = [
 		max-width: 42ch;
 		margin: 0;
 	}
-
-	/* Grid Layout - Tightened to remove huge gap */
 	.about-grid {
 		max-width: 900px;
 		margin: 0 auto;
@@ -134,14 +123,12 @@ const kitList = [
 		gap: 3.5rem;
 		align-items: start;
 	}
-
 	.portrait-wrapper {
 		display: flex;
 		flex-direction: column;
 		gap: 0.8rem;
 		width: 100%;
 	}
-
 	.portrait-img {
 		width: 100%;
 		aspect-ratio: 4 / 5;
@@ -149,7 +136,6 @@ const kitList = [
 		border-radius: 6px;
 		border: 1px solid rgba(255, 255, 255, 0.08);
 	}
-
 	.portrait-caption {
 		display: flex;
 		align-items: center;
@@ -158,21 +144,17 @@ const kitList = [
 		color: rgba(242, 242, 240, 0.45);
 		letter-spacing: 0.03em;
 	}
-
 	.portrait-caption .dot {
 		width: 4px;
 		height: 4px;
 		background: rgba(242, 242, 240, 0.3);
 		border-radius: 50%;
 	}
-
-	/* Bio / Stats Column */
 	.bio-content {
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
 	}
-
 	.stats-row {
 		display: flex;
 		flex-direction: column;
@@ -180,58 +162,48 @@ const kitList = [
 		padding-left: 2rem;
 		border-left: 1px solid rgba(255, 255, 255, 0.08);
 	}
-
 	.stat-item {
 		display: flex;
 		flex-direction: column;
 		gap: 0.25rem;
 	}
-
 	.stat-value {
 		font-size: 1.15rem;
 		font-weight: 600;
 		color: #f2f2f0;
 		letter-spacing: -0.01em;
 	}
-
 	.stat-label {
 		font-size: 0.72rem;
 		color: rgba(242, 242, 240, 0.45);
 		text-transform: uppercase;
 		letter-spacing: 0.05em;
 	}
-
-	/* Kit / Capabilities Section */
 	.kit-section {
 		max-width: 900px;
 		margin: 0 auto;
 		padding: 2rem 2rem 8rem;
 		border-top: 1px solid rgba(255, 255, 255, 0.08);
 	}
-
 	.kit-header {
 		margin-bottom: 1.5rem;
 	}
-
 	.kit-header h2 {
 		font-size: 1.3rem;
 		font-weight: 500;
 		color: #f2f2f0;
 		margin: 0 0 0.35rem;
 	}
-
 	.kit-header p {
 		font-size: 0.85rem;
 		color: rgba(242, 242, 240, 0.45);
 		margin: 0;
 	}
-
 	.kit-tags {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.6rem;
 	}
-
 	.kit-tag {
 		padding: 0.55em 1em;
 		background: rgba(255, 255, 255, 0.03);
@@ -242,17 +214,14 @@ const kitList = [
 		letter-spacing: 0.02em;
 	}
 
-	/* Responsive Breakpoints */
 	@media (max-width: 768px) {
 		.about-grid {
 			grid-template-columns: 1fr;
 			gap: 2.5rem;
 		}
-
 		.portrait-wrapper {
 			max-width: 280px;
 		}
-
 		.stats-row {
 			padding-left: 0;
 			border-left: none;
