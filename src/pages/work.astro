@@ -5,7 +5,6 @@ import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 const featuredWork = [
-	// --- VIDEOS ---
 	{
 		title: 'Maple Syrup',
 		category: 'Short Film',
@@ -62,8 +61,6 @@ const featuredWork = [
 		description: 'Filmed, Directed, Written, and Edited by Lleyton Lewis',
 		embedUrl: 'https://www.youtube.com/embed/5KZmltfoeR4',
 	},
-
-	// --- PHOTOS (In public/ root folder) ---
 	{
 		title: 'Warner Bros Studio Lot',
 		category: 'Warner Bros Studio Lot California',
@@ -242,7 +239,6 @@ const featuredWork = [
 	},
 ];
 
-// Automatically sort all work from newest to oldest by date
 const sortedWork = [...featuredWork].sort(
 	(a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
 );
@@ -267,7 +263,6 @@ const sortedWork = [...featuredWork].sort(
 				<div class="work-header">
 					<h2>Selected Work</h2>
 					
-					<!-- Filter Controls -->
 					<div class="filter-tabs">
 						<button class="filter-btn active" data-filter="all">All</button>
 						<button class="filter-btn" data-filter="Video">Videos</button>
@@ -320,7 +315,6 @@ const sortedWork = [...featuredWork].sort(
 		<Footer />
 
 		<script>
-			// Set current date dynamically on client load
 			const dateSpan = document.getElementById('current-date');
 			if (dateSpan) {
 				const today = new Date();
@@ -331,7 +325,6 @@ const sortedWork = [...featuredWork].sort(
 				});
 			}
 
-			// Client-side filtering logic
 			const filterBtns = document.querySelectorAll('.filter-btn');
 			const workItems = document.querySelectorAll('.work-item');
 
@@ -378,7 +371,6 @@ const sortedWork = [...featuredWork].sort(
 		letter-spacing: -0.02em;
 		color: #f2f2f0;
 	}
-
 	.work {
 		max-width: 1200px;
 		margin: 0 auto;
@@ -401,7 +393,6 @@ const sortedWork = [...featuredWork].sort(
 		letter-spacing: -0.01em;
 		color: #f2f2f0;
 	}
-
 	.filter-tabs {
 		display: flex;
 		gap: 0.5rem;
@@ -426,7 +417,6 @@ const sortedWork = [...featuredWork].sort(
 		border-color: #f2f2f0;
 		font-weight: 500;
 	}
-
 	.updated-at {
 		font-size: 0.85rem;
 		color: rgba(242, 242, 240, 0.5);
@@ -435,18 +425,15 @@ const sortedWork = [...featuredWork].sort(
 	.updated-at span {
 		color: #f2f2f0;
 	}
-
 	.work-grid {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		gap: 3.5rem 2rem;
 	}
-
 	.work-item {
 		display: flex;
 		flex-direction: column;
 	}
-
 	.video-embed-wrapper {
 		position: relative;
 		width: 100%;
@@ -464,7 +451,6 @@ const sortedWork = [...featuredWork].sort(
 		height: 100%;
 		border: 0;
 	}
-
 	.photo-thumb-wrapper {
 		position: relative;
 		width: 100%;
@@ -480,7 +466,6 @@ const sortedWork = [...featuredWork].sort(
 		object-fit: cover;
 		display: block;
 	}
-
 	.work-item-meta {
 		display: flex;
 		align-items: flex-start;
